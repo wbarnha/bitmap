@@ -43,7 +43,7 @@ class BitMap(object):
         """
         self.bitmap[pos // 8] |= self.BITMASK[pos % 8]
 
-    def reset(self, pos):
+    def unset(self, pos):
         """
         Reset the value of bit@pos to 0
         """
@@ -133,7 +133,7 @@ class BitMap(object):
         if value is True:
             self.set(key)
         elif value is False:
-            self.reset(key)
+            self.unset(key)
         else:
             raise Exception("Use a boolean value to assign to a bitfield")
 
