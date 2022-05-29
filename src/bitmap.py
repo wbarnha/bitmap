@@ -33,6 +33,9 @@ class BitMap(object):
         Destroy the BitMap
         """
         pass
+    
+    def __bytes__(self):
+        return self.bitmap.tobytes()
 
     def set(self, pos):
         """
@@ -88,17 +91,21 @@ class BitMap(object):
         """
         return (self.count() + 7) // 8 * 8 == self.size()
 
-    def nonzero(self):
+    def nonzeros(self):
         """
         Get all non-zero bits
         """
-        return [i for i in xrange(self.size()) if self.test(i)]
+        for i in range(self.size()):
+            if self.test(i):
+                yield i
 
-    def zero(self):
+    def zeros(self):
         """
-         Get all zero bits
-         """
-        return [i for i in xrange(self.size()) if not self.test(i)]
+        Get all zero bits
+        """
+        for i in range(self.size()):
+            if not self.test(i):
+                yield i
 
     def tostring(self):
         """
