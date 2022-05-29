@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 
 """
@@ -6,16 +6,11 @@
       Author: Wan Ji
       E-mail: wanji@live.com
   Created on: Thu May  1 15:26:18 2014 CST
-"""
-DESCRIPTION = """
-BitMap class
+
+  Description: BitMap Class
 """
 
 import array
-try:
-    from past.builtins import xrange
-except ImportError:
-    pass
 
 class BitMap(object):
     """
@@ -23,7 +18,7 @@ class BitMap(object):
     """
 
     BITMASK = [0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80]
-    BIT_CNT = [bin(i).count("1") for i in xrange(256)]
+    BIT_CNT = [bin(i).count("1") for i in range(256)]
 
     def __init__(self, maxnum=0, preset=False):
         """
@@ -98,12 +93,12 @@ class BitMap(object):
         Get all non-zero bits
         """
         return [i for i in xrange(self.size()) if self.test(i)]
-   
+
     def zero(self):
-         """
+        """
          Get all zero bits
          """
-         return [i for i in xrange(self.size()) if not self.test(i)]
+        return [i for i in xrange(self.size()) if not self.test(i)]
 
     def tostring(self):
         """
@@ -141,14 +136,14 @@ class BitMap(object):
         """
         val = self.tostring()
         st = "{0:0x}".format(int(val, 2))
-        return st.zfill(len(self.bitmap)*2)
+        return st.zfill(len(self.bitmap) * 2)
 
     @classmethod
     def fromhexstring(cls, hexstring):
         """
         Construct BitMap from hex string
         """
-        bitstring = format(int(hexstring, 16), "0" + str(len(hexstring)/4) + "b")
+        bitstring = format(int(hexstring, 16), "0" + str(len(hexstring) / 4) + "b")
         return cls.fromstring(bitstring)
 
     @classmethod
@@ -158,9 +153,9 @@ class BitMap(object):
         """
         nbits = len(bitstring)
         bm = cls(nbits)
-        for i in xrange(nbits):
-            if bitstring[-i-1] == '1':
+        for i in range(nbits):
+            if bitstring[-i - 1] == '1':
                 bm.set(i)
-            elif bitstring[-i-1] != '0':
+            elif bitstring[-i - 1] != '0':
                 raise Exception("Invalid bit string!")
         return bm
