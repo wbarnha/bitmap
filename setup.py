@@ -15,20 +15,16 @@ except ImportError:
 
 setup(name='bitmap',
       version='0.0.7',
-      author='WAN Ji',
-      author_email='wanji@live.com',
+      author='KX',
+      author_email='*',
       package_dir={'bitmap': 'src'},
       packages=['bitmap'],
-      url='https://github.com/wanji/bitmap',
+      url='https://github.com/kx8qt/bitmap',
       # license='LICENSE.txt',
       description='.',
       long_description=open('README.md').read(),
       long_description_content_type="text/markdown",
-      install_requires=[
-          'future',
-      ],
       classifiers=[
-          'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3.7',
       ],
       )

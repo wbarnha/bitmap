@@ -15,11 +15,6 @@ DESCRIPTION = """
 
 import unittest
 from bitmap import BitMap
-try:
-    from past.builtins import xrange
-except ImportError:
-    pass
-
 
 class TestBitMap(unittest.TestCase):
     def setUp(self):
@@ -63,7 +58,7 @@ class TestBitMap(unittest.TestCase):
             bm = BitMap.fromstring(bitstr)
             self.assertEqual(bitstr.count("1"), bm.count())
             self.assertEqual(bitstr.count("1"),
-                             len([i for i in xrange(bm.size()) if bm.test(i)]))
+                             len([i for i in range(bm.size()) if bm.test(i)]))
 
         for bitstr in self.v_str[:-4]:
             self.assertTrue(BitMap.fromstring(bitstr).any())
