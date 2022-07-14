@@ -147,10 +147,10 @@ class BitMap(object):
 
     def tofile(self, path):
         """
-        Save bitmap to file
+        Save bitmap as array to file
         """
-        with open(path, 'w') as file:
-            file.write(self.tostring())
+        with open(path, 'wb') as file:
+            self.bitmap.tofile(file)
 
     @classmethod
     def fromhexstring(cls, hexstring):
@@ -175,10 +175,13 @@ class BitMap(object):
         return bm
 
     @classmethod              
-    def fromfile(cls, path):
+    def fromfile(cls, path, maxnum):
         """
-        Construct BitMap from string saved in file
+        Construct BitMap from array saved in file
         """
-        with open(path, 'r') as file:
-            bitstring = file.read()
-        return cls.fromstring(bitstring)
+        bm = cls(maxnum)
+        bm.bitmap = array.array('B')
+        file = open(path, 'rb')
+        bm.bitmap.fromfile(file, (maxnum + 7) // 8)
+        file.close()
+        return bm
