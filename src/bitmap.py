@@ -174,8 +174,11 @@ class BitMap(object):
                 raise Exception("Invalid bit string!")
         return bm
 
-     @classmethod
+    @classmethod              
     def fromfile(cls, path):
+        """
+        Construct BitMap from string saved in file
+        """
         with open(path, 'r') as file:
             bitstring = file.read()
         return cls.fromstring(bitstring)
