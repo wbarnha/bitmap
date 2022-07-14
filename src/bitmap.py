@@ -145,6 +145,13 @@ class BitMap(object):
         st = "{0:0x}".format(int(val, 2))
         return st.zfill(len(self.bitmap) * 2)
 
+    def tofile(self, path):
+        """
+        Save bitmap to file
+        """
+        with open(path, 'w') as file:
+            file.write(self.tostring()
+
     @classmethod
     def fromhexstring(cls, hexstring):
         """
@@ -166,3 +173,9 @@ class BitMap(object):
             elif bitstring[-i - 1] != '0':
                 raise Exception("Invalid bit string!")
         return bm
+
+     @classmethod
+    def fromfile(cls, path):
+        with open(path, 'r') as file:
+            bitstring = file.read()
+        return cls.fromstring(bitstring)
