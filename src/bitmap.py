@@ -150,14 +150,14 @@ class BitMap(object):
         Save bitmap to file
         """
         with open(path, 'w') as file:
-            file.write(self.tostring()
+            file.write(self.tostring())
 
     @classmethod
     def fromhexstring(cls, hexstring):
         """
         Construct BitMap from hex string
         """
-        bitstring = format(int(hexstring, 16), "0" + str(len(hexstring) / 4) + "b")
+        bitstring = format(int(hexstring, 16), "0" + str(len(hexstring)/4) + "b")
         return cls.fromstring(bitstring)
 
     @classmethod
