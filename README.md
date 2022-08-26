@@ -26,7 +26,10 @@ pip3 install bitmap2
 - `any()`: check if any bit in the `BitMap` has been set to 1
 - `none()`: check if none of the bits in the `BitMap` has been set to 1
 - `all()`: check if all bits in the `BitMap` has been set to 1
-- `nonzero()`: return indexes of all non-zero bits
+- `nonzero()`: return list of indexes of all non-zero bits
+- `nonzeros()`: return generator of indexes of all non-zero bits
+- `zero()`: return list of indexes of all zero bits
+- `zeros()`: return generator of indexes of all zero bits
 - `tostring()`: convert a `BitMap` object to `0` and `1` string
 - `tofile(path)`: save a `BitMap` object to a file on `path`
 - `fromstring(bitstring)`: create a `BitMap` object from `0` and `1` string

@@ -22,7 +22,7 @@ class BitMap(object):
     """
 
     BITMASK = [0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80]
-    BIT_CNT = [bin(i).count("1") for i in range(256)]
+    BIT_CNT = [bin(i).count("1") for i in iter(range(256))]
 
     def __init__(self, maxnum=0, bitmap=None):
         """
@@ -42,7 +42,19 @@ class BitMap(object):
         pass
     
     def __bytes__(self):
-        return self.bitmap.tobytes()
+        return self.to_bytes()
+
+    def to_bytes(self):
+        return bytes(self.bitmap)
+
+    def bit_size(self):
+        return self.bits
+
+    def byte_size(self):
+        """
+        Return size
+        """
+        return len(self.bitmap)
 
     def set(self, pos):
         """
@@ -58,7 +70,7 @@ class BitMap(object):
 
     def reset(self, pos):
         """
-        Reset the value of bit@pos to 0, legacy method
+        Reset the value of bit@pos to 0
         """
         self.unset(pos)
 
@@ -106,19 +118,31 @@ class BitMap(object):
 
     def nonzeros(self):
         """
-        Get all non-zero bits
+        Get all non-zero bits, returns generator
         """
-        for i in range(self.size()):
+        for i in iter(range(self.size())):
             if self.test(i):
                 yield i
 
+    def nonzero(self):
+        """
+        Get all non-zero bits, returns list
+        """
+        return list(self.nonzeros())
+
     def zeros(self):
         """
-        Get all zero bits
+        Get all zero bits, returns generator
         """
-        for i in range(self.size()):
+        for i in iter(range(self.size())):
             if not self.test(i):
                 yield i
+
+    def zero(self):
+        """
+        Get all zero bits, returns list
+        """
+        return list(self.zeros())
 
     def tostring(self):
         """
@@ -180,7 +204,7 @@ class BitMap(object):
         """
         nbits = len(bitstring)
         bm = cls(nbits)
-        for i in range(nbits):
+        for i in iter(range(nbits)):
             if bitstring[-i - 1] == '1':
                 bm.set(i)
             elif bitstring[-i - 1] != '0':
