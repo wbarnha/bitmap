@@ -1,6 +1,9 @@
 BitMap for python
 =================
 
+An updated version of the bitmap library from https://github.com/wanji/bitmap since the original 
+project is no longer maintained.
+
 This package provides a `BitMap` class which is an array of bits stored in compact format.
 
 # Installation
@@ -8,7 +11,7 @@ This package provides a `BitMap` class which is an array of bits stored in compa
 `bitmap` can be installed from `pip`:
 
 ```bash
-$ sudo pip install bitmap
+pip3 install bitmap2
 ```
 
 # Functions

@@ -49,6 +49,12 @@ class BitMap(object):
         """
         self.bitmap[pos // 8] &= ~self.BITMASK[pos % 8]
 
+    def reset(self, pos):
+        """
+        Reset the value of bit@pos to 0, legacy method
+        """
+        self.unset(pos)
+
     def flip(self, pos):
         """
         Flip the value of bit@pos

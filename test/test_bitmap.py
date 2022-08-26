@@ -14,7 +14,8 @@ DESCRIPTION = """
 """
 
 import unittest
-from bitmap import BitMap
+from src.bitmap import BitMap
+
 
 class TestBitMap(unittest.TestCase):
     def setUp(self):
