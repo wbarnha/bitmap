@@ -17,7 +17,7 @@ except ImportError:
 setup(name='bitmap2',
       version='0.0.8',
       author='wbarnha',
-      author_email='*',
+      author_email='williambbarnhart@gmail.com',
       package_dir={'bitmap': 'src'},
       packages=['bitmap'],
       url='https://github.com/wbarnha/bitmap',
