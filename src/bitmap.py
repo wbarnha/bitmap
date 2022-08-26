@@ -24,16 +24,17 @@ class BitMap(object):
     BITMASK = [0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80]
     BIT_CNT = [bin(i).count("1") for i in iter(range(256))]
 
-    def __init__(self, maxnum=0, bitmap=None):
+    def __init__(self, maxnum=0, bitmap=None, preset=False):
         """
         Create a BitMap
         """
         self.bits = maxnum
         nbytes = (maxnum + 7) // 8
+        bit_value = 0xFF if preset else 0x00
         if bitmap:
             self.bitmap = bytearray(bitmap)
         else:
-            self.bitmap = array.array('B', [0 for i in range(nbytes)])
+            self.bitmap = array.array('B', [bit_value for i in range(nbytes)])
 
     def __del__(self):
         """
@@ -128,7 +129,7 @@ class BitMap(object):
         """
         Get all non-zero bits, returns list
         """
-        return list(self.nonzeros())
+        return [i for i in iter(range(self.size())) if self.test(i)]
 
     def zeros(self):
         """
@@ -142,7 +143,7 @@ class BitMap(object):
         """
         Get all zero bits, returns list
         """
-        return list(self.zeros())
+        return [i for i in iter(range(self.size())) if not self.test(i)]
 
     def tostring(self):
         """
