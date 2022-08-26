@@ -15,9 +15,9 @@ except ImportError:
     from distutils.core import setup
 
 setup(name='bitmap2',
-      version='0.0.8rc2',
+      version='0.0.8rc3',
       author='wbarnha',
-      author_email='*',
+      author_email='williambbarnhart@gmail.com',
       package_dir={'bitmap': 'src'},
       packages=['bitmap'],
       url='https://github.com/wbarnha/bitmap',
