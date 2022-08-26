@@ -26,6 +26,10 @@ setup(name='bitmap2',
       long_description=open('README.md').read(),
       long_description_content_type="text/markdown",
       classifiers=[
-          'Programming Language :: Python :: 3.7',
+            'Programming Language :: Python :: 3 :: Only',
+            'Topic :: Utilities',
+            'License :: OSI Approved :: MIT License',
+            'Development Status :: 5 - Production/Stable',
+            'Intended Audience :: Developers',
       ],
       )
