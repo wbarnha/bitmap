@@ -6,7 +6,7 @@ on:
   release:
     types: [created]
     branches:
-      - 'master'
+      - 'test-upload-workflow'
 
 jobs:
   build_wheels:
@@ -66,4 +66,6 @@ jobs:
         name: "Publish package to PyPI"
         with:
           user: '__token__'
-          password: '${{ secrets.PYPI_API_TOKEN }}'
+          password: '${{ secrets.TEST_PYPI_API_TOKEN }}'
+          repository_url: https://test.pypi.org/legacy/
+
