@@ -15,7 +15,7 @@ except ImportError:
     from distutils.core import setup
 
 setup(name='bitmap2',
-      version='0.0.8',
+      version='0.1.0',
       author='wbarnha',
       author_email='williambbarnhart@gmail.com',
       package_dir={'bitmap': 'src'},
@@ -26,7 +26,8 @@ setup(name='bitmap2',
       long_description=open('README.md').read(),
       long_description_content_type="text/markdown",
       classifiers=[
-            'Programming Language :: Python :: 3 :: Only',
+            'Programming Language :: Python :: 2.7',
+            'Programming Language :: Python :: 3',
             'Topic :: Utilities',
             'License :: OSI Approved :: MIT License',
             'Development Status :: 5 - Production/Stable',

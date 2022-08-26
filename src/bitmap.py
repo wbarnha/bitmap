@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # coding: utf-8
 
 """
@@ -11,6 +11,10 @@
 """
 
 import array
+try:
+    from past.builtins import range
+except ImportError:
+    pass
 
 class BitMap(object):
     """
@@ -20,13 +24,16 @@ class BitMap(object):
     BITMASK = [0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80]
     BIT_CNT = [bin(i).count("1") for i in range(256)]
 
-    def __init__(self, maxnum=0, preset=False):
+    def __init__(self, maxnum=0, bitmap=None):
         """
         Create a BitMap
         """
+        self.bits = maxnum
         nbytes = (maxnum + 7) // 8
-        bit_value = 0xFF if preset else 0x00
-        self.bitmap = array.array('B', [bit_value for i in range(nbytes)])
+        if bitmap:
+            self.bitmap = bytearray(bitmap)
+        else:
+            self.bitmap = array.array('B', [0 for i in range(nbytes)])
 
     def __del__(self):
         """
@@ -180,14 +187,17 @@ class BitMap(object):
                 raise Exception("Invalid bit string!")
         return bm
 
-    @classmethod              
-    def fromfile(cls, path, maxnum):
-        """
-        Construct BitMap from array saved in file
-        """
-        bm = cls(maxnum)
-        bm.bitmap = array.array('B')
-        file = open(path, 'rb')
-        bm.bitmap.fromfile(file, (maxnum + 7) // 8)
-        file.close()
-        return bm
+    @classmethod
+    def fromfile(cls, path, maxnum=None):
+        if maxnum is None:
+            with open(path, 'rb') as file:
+                bitmap = file.read()
+            return cls(bitmap=bitmap)
+        else:
+            bm = cls(maxnum)
+            bm.bitmap = array.array('B')
+            file = open(path, 'rb')
+            bm.bitmap.fromfile(file, (maxnum + 7) // 8)
+            file.close()
+            return bm
+
