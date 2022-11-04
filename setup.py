@@ -15,7 +15,8 @@ except ImportError:
     from distutils.core import setup
 
 setup(name='bitmap2',
-      version='0.1.0',
+      use_scm_version=True,
+      setup_requires=['setuptools_scm'],
       author='wbarnha',
       author_email='williambbarnhart@gmail.com',
       package_dir={'bitmap': 'src'},
