@@ -181,12 +181,28 @@ class BitMap(object):
         """
         Sets a bit when indexing like a array
         """
-        if value is True:
-            self.set(key)
-        elif value is False:
-            self.unset(key)
-        else:
+        if not isinstance(value, bool):
             raise Exception("Use a boolean value to assign to a bitfield")
+        if isinstance(key, slice):
+            # these attrs are readonly
+            start = key.start
+            stop = key.stop
+            step = key.step
+            if not isinstance(key.start, int):
+                start = 0
+            if not isinstance(key.step, int):
+                step = 1
+            if not isinstance(key.stop, int):
+                stop = self.bit_size()
+            if value:
+                [self.set(i) for i in range(start, stop, step)]
+            else:
+                [self.reset(i) for i in range(start, stop, step)]
+        else:
+            if value:
+                self.set(value)
+            else:
+                self.reset(value)
 
     def tohexstring(self):
         """
