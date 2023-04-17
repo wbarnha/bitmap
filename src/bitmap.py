@@ -162,7 +162,20 @@ class BitMap(object):
         """
         Return a bit when indexing like a array
         """
-        return self.test(item)
+        if isinstance(item, slice):
+            # these attrs are readonly
+            start = item.start
+            stop = item.stop
+            step = item.step
+            if not isinstance(item.start, int):
+                start = 0
+            if not isinstance(item.step, int):
+                step = 1
+            if not isinstance(item.stop, int):
+                stop = self.bit_size()
+            return [self.test(i) for i in range(start, stop, step)]
+        else:
+            return self.test(item)
 
     def __setitem__(self, key, value):
         """
