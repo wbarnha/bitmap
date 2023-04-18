@@ -252,7 +252,6 @@ class BitMap(object):
             return cls(bitmap=bitmap)
         else:
             bm = cls(maxnum)
-            bm.bitmap = array.array('B')
             file = open(path, 'rb')
             bm.bitmap.fromfile(file, (maxnum + 7) // 8)
             file.close()
