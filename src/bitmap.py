@@ -214,10 +214,13 @@ class BitMap(object):
 
     def tofile(self, path):
         """
-        Save bitmap as array to file
+        Save bitmap to file
         """
         with open(path, 'wb') as file:
-            self.bitmap.tofile(file)
+            if isinstance(self.bitmap, bytearray):
+                file.write(self.bitmap)
+            else:
+                self.bitmap.tofile(file)
 
     @classmethod
     def fromhexstring(cls, hexstring):
