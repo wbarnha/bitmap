@@ -173,7 +173,7 @@ class BitMap(object):
                 step = 1
             if not isinstance(item.stop, int):
                 stop = self.bit_size()
-            return [self.test(i) for i in range(start, stop, step)]
+            return [self.test(i) for i in range(start, min(stop, self.bit_size()), step)]
         else:
             return self.test(item)
 
@@ -195,9 +195,9 @@ class BitMap(object):
             if not isinstance(key.stop, int):
                 stop = self.bit_size()
             if value:
-                [self.set(i) for i in range(start, stop, step)]
+                [self.set(i) for i in range(start, min(stop, self.bit_size()), step)]
             else:
-                [self.reset(i) for i in range(start, stop, step)]
+                [self.reset(i) for i in range(start, min(stop, self.bit_size()), step)]
         else:
             if value:
                 self.set(value)
