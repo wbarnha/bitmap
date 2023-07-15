@@ -11,6 +11,7 @@
 """
 
 import array
+import itertools
 try:
     from past.builtins import range
 except ImportError:
@@ -34,7 +35,7 @@ class BitMap(object):
         if bitmap:
             self.bitmap = bytearray(bitmap)
         else:
-            self.bitmap = array.array('B', [bit_value for i in range(nbytes)])
+            self.bitmap = array.array('B', itertools.repeat(bit_value, times=nbytes))
 
     def __del__(self):
         """
