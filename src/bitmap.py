@@ -140,6 +140,29 @@ class BitMap(object):
             if not self.test(i):
                 yield i
 
+    def merge(self, other_bitmap):
+        """
+        Apply OR operation to bitmap with another BitMap class
+        """
+        # See https://stackoverflow.com/a/30679284/9852671 for notes
+        pos = 0
+        for x, y in zip(self[:], other_bitmap[:]):
+            if x or y:
+                self.set(pos)
+            pos += 1
+
+    def xor(self, other_bitmap):
+        """
+        Apply XOR operation to bitmap with another BitMap class
+        """
+        pos = 0
+        for x, y in zip(self[:], other_bitmap[:]):
+            if (not x) ^ (not y):
+                self.set(pos)
+            else:
+                self.reset(pos)
+            pos += 1
+
     def zero(self):
         """
         Get all zero bits, returns list
